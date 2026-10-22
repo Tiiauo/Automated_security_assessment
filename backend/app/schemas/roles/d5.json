@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sec-eval:d5-env-inspection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["language_stack", "checks", "limitations", "summary"],
+  "properties": {
+    "language_stack": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "type": "string", "maxLength": 64 }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "passed", "detail"],
+        "properties": {
+          "name": { "enum": ["source_readable", "source_readonly", "workspace_writable", "sandbox_isolation", "tools_available"] },
+          "passed": { "type": "boolean" },
+          "detail": { "type": "string", "maxLength": 2000 }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "detail"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "detail": { "type": "string", "minLength": 1, "maxLength": 2000 }
+        }
+      }
+    },
+    "summary": { "type": "string", "maxLength": 2000 }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sec-eval:d1-candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "candidates"],
+  "properties": {
+    "summary": { "type": "string", "maxLength": 2000 },
+    "candidates": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "vuln_type", "risk_level", "file_path", "condition_text", "evidence_text"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+          "vuln_type": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "risk_level": { "enum": ["critical", "high", "medium", "low", "info"] },
+          "cvss_score": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+          "file_path": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "condition_text": { "type": "string", "maxLength": 5000 },
+          "evidence_text": { "type": "string", "maxLength": 65536 },
+          "impact_text": { "type": "string", "maxLength": 5000 },
+          "confidence": { "enum": ["high", "medium", "low"] }
+        }
+      }
+    }
+  }
+}

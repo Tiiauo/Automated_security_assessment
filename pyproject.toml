@@ -1,0 +1,49 @@
+[project]
+name = "sec-eval-backend"
+version = "0.1.0"
+description = "自动化安全评估系统后端"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+  "pydantic>=2.8,<3",
+  "pydantic-settings>=2.4,<3",
+  "sqlalchemy[asyncio]>=2.0.30,<3",
+  "asyncpg>=0.29,<1",
+  "alembic>=1.13,<2",
+  "pyjwt>=2.9,<3",
+  "argon2-cffi>=23.1,<26",
+  "cryptography>=43,<47",
+  "jsonschema>=4.23,<5",
+  "docker>=7.1,<8",
+  "markdown-it-py>=3.0,<4",
+  "nh3>=0.2.18,<1",
+  "httpx>=0.27,<1",
+  "python-multipart>=0.0.9,<1",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.24,<1",
+  "ruff>=0.6,<1",
+  "mypy>=1.11,<2",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["backend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+# FastAPI 的 Depends/Body 在参数默认值中是惯用写法
+ignore = ["B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend"]
+asyncio_mode = "auto"

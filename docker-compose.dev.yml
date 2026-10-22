@@ -1,0 +1,33 @@
+name: sec-eval
+
+services:
+  db:
+    image: postgres:16
+    container_name: sec-eval-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sec_eval}
+      POSTGRES_USER: ${POSTGRES_USER:-sec_eval}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+      TZ: Asia/Shanghai
+    ports:
+      # 仅绑定虚拟机回环地址，供 SSH 隧道访问，不对局域网暴露
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sec_eval} -d ${POSTGRES_DB:-sec_eval}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # 仅用于构建隔离环境镜像：docker compose --profile build build sandbox-image
+  sandbox-image:
+    build:
+      context: ./sandbox
+    image: sec-eval-sandbox:latest
+    profiles: ["build"]
+    command: ["true"]
+
+volumes:
+  pgdata:

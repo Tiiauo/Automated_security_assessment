@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sec-eval:d4-report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["markdown", "conclusion_rating"],
+  "properties": {
+    "markdown": { "type": "string", "minLength": 1, "maxLength": 200000 },
+    "conclusion_rating": { "enum": ["critical", "high", "medium", "low", "info"] }
+  }
+}

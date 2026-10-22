@@ -1,0 +1,73 @@
+# 本机环境与凭据；仅提交无真实配置的示例
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# ---- Node ----
+node_modules/
+frontend/dist/
+frontend/.vite/
+dist-ssr/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# 运行数据默认忽略；只提交说明、占位文件和两个内置示例
+/data/*
+!/data/README.md
+!/data/allowed_sources/
+/data/allowed_sources/*
+!/data/allowed_sources/.gitkeep
+!/data/allowed_sources/demo-app/
+!/data/allowed_sources/demo-clean/
+!/data/sources/
+/data/sources/*
+!/data/sources/.gitkeep
+!/data/workspace/
+/data/workspace/*
+!/data/workspace/.gitkeep
+!/data/reports/
+/data/reports/*
+!/data/reports/.gitkeep
+!/data/runtime_logs/
+/data/runtime_logs/*
+!/data/runtime_logs/.gitkeep
+
+# 本机助手配置与历史设计资料（保留在本地，不属于运行交付物）
+/.claude/
+/.codex/
+/docs/prototypes/
+/docs/*.pen
+/docs/pen-dev-原型图提示词.md
+
+# ---- 系统与编辑器 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

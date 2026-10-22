@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sec-eval:d2-verdicts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "verdicts"],
+  "properties": {
+    "summary": { "type": "string", "maxLength": 2000 },
+    "verdicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["vuln_code", "verify_status", "risk_level", "impact_text", "condition_text", "evidence_text", "reproduce_steps_text", "verify_code_text"],
+        "properties": {
+          "vuln_code": { "type": "string", "pattern": "^VULN-[0-9]{3,}$" },
+          "verify_status": { "enum": ["verified", "unverified", "false_positive"] },
+          "risk_level": { "enum": ["critical", "high", "medium", "low", "info"] },
+          "cvss_score": { "type": ["number", "null"], "minimum": 0, "maximum": 10 },
+          "impact_text": { "type": "string", "maxLength": 5000 },
+          "condition_text": { "type": "string", "maxLength": 5000 },
+          "evidence_text": { "type": "string", "maxLength": 65536 },
+          "reproduce_steps_text": { "type": "string", "maxLength": 10000 },
+          "verify_code_text": { "type": "string", "maxLength": 65536 }
+        }
+      }
+    }
+  }
+}

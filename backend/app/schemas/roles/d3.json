@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:sec-eval:d3-attack-paths",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "paths"],
+  "properties": {
+    "summary": { "type": "string", "maxLength": 2000 },
+    "paths": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path_title", "path_summary", "final_impact_text", "steps"],
+        "properties": {
+          "path_title": { "type": "string", "minLength": 1, "maxLength": 200 },
+          "path_summary": { "type": "string", "maxLength": 5000 },
+          "final_impact_text": { "type": "string", "maxLength": 5000 },
+          "steps": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["vuln_code", "step_text"],
+              "properties": {
+                "vuln_code": { "type": "string", "pattern": "^VULN-[0-9]{3,}$" },
+                "step_text": { "type": "string", "minLength": 1, "maxLength": 2000 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
